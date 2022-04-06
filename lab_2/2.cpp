@@ -1,3 +1,14 @@
+/*
+ n=10:quicksort:0.0000352
+		 bubblesort:0.0000372
+ n=100:quicksort:0.00064
+		  bubblesort:0.003954
+ n=1000:quicksort:0.00064
+		bubblesort:0.02250
+ n=10000:quicksort:0.00623
+		:bubblesort:0.8877
+*/
+
 #include <iostream>
 #include <chrono>
 #define N 10
@@ -34,6 +45,7 @@ void QuickSort(int a, int b, int* x)
 	QuickSort(a, l, x);
 	QuickSort(r, b, x);
 }
+
 void BUBBLESORT(int* mas, int n)
 {
 	bool fl = false;
@@ -76,6 +88,7 @@ public:
 		return std::chrono::duration_cast<second_t>(clock_t::now() - m_beg).count();
 	}
 };
+
 int main()
 {
 	srand(time(0));
@@ -86,25 +99,25 @@ int main()
 		mas1[i] = rand();
 		mas2[i] = mas1[i];
 	}
-/*	for (int i = 0; i < N; i++)
-	{
-		std::cout << mas1[i] << " ";
-	}*/
+	for (int i = 0; i < N; i++)
+		{
+			std::cout << mas1[i] << " ";
+		}
 	std::cout << std::endl;
 	Timer a;
 	QuickSort(1, N - 1, mas1);
 	std::cout << "Time elapsed quicksort: " << a.elapsed() << std::endl;
-/*	for (int i = 0; i < N; i++)
+	for (int i = 0; i < N; i++)
 	{
 		std::cout << mas1[i] << " ";
-	}*/
+	}
 	std::cout << std::endl;
 	Timer b;
 	BUBBLESORT(mas2, N);
 	std::cout << "Time elapsed bubblesort: " << b.elapsed() << std::endl;
-/*	for (int i = 0; i < N; i++)
+	for (int i = 0; i < N; i++)
 	{
 		std::cout << mas2[i] << " ";
-	} */
+	} 
 	return 0;
 }
