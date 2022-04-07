@@ -1,4 +1,4 @@
-ì#include <iostream>
+#include <iostream>
 #include <chrono>
 class Timer
 {
