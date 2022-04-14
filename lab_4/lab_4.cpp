@@ -1,3 +1,4 @@
+
 #include <iostream>
 #include <chrono>
 
@@ -94,7 +95,7 @@ int main()
 		ADD(head, rand() % 10);
 	}
 
-	//	PRINT(head);
+	
 
 	for (int i = 0; i < M; i++)
 	{
@@ -102,21 +103,7 @@ int main()
 	}
 
 	Timer a;
-	for (int i = 0; i < M; i++)
-	{
-		if (FIND(head, x[i]) == true)
-		{
-			//std::cout << x[i] << "-iaeaai" << std::endl;
-			
-		}
-		else
-		{
-			//std::cout << x[i] << "-ia iaeaai" << std::endl;
-			
-		}
-    }
-
-	std::cout << a.elapsed()<< std::endl;
+	std::cout << "List " << a.elapsed() << std::endl;
 	CLEAR(head);
 	delete head;
 	std::cout << std::endl;
@@ -126,21 +113,8 @@ int main()
 		mass[i] = rand() % 10;
 	}
 	Timer b;
-	/*for (int i = 0; i < N; i++)
-	{
-		for (int j = 0; j < M; j++)
-		{
-			if (mass[i] == x[j])
-			{
-				//std::cout << x[j]<< "-iaeaai"  << std::endl;
-			}
-			else
-			{
-				//std::cout << x[j] << "-ia iaeaai"  << std::endl;
-			}
-		}
-	}*/
-	std::cout << b.elapsed() << std::endl;
+	
+	std::cout << "Massiv " << b.elapsed() << std::endl;
 	delete[] mass;
 	delete[] x;
 	return 0;
