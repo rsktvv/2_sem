@@ -66,7 +66,7 @@ void CLEAR(T_List* head)
 bool FIND(T_List* head,int x)
 {
 	T_List* p = head->next;
-	while (p->next->next != nullptr)
+	while (p->next != nullptr)
 	{
 		if (p->elements == x)
 		{
@@ -84,6 +84,7 @@ int main()
 {
 	setlocale(LC_ALL, "Rus");
 	srand(time(NULL));
+
 	T_List* head = new T_List; 
 	head->next = nullptr; 
 	int N = 10000;
@@ -95,26 +96,27 @@ int main()
 		ADD(head, rand() % 10);
 	}
 
-	
+	Timer a;
 
 	for (int i = 0; i < M; i++)
 	{
 		x[i] = rand() % 10;
 	}
 
-	Timer a;
+	
 	std::cout << "List " << a.elapsed() << std::endl;
 	CLEAR(head);
 	delete head;
 	std::cout << std::endl;
+	Timer b;
 	int* mass = new int[N];
 	for (int i = 0; i < N; i++)
 	{
 		mass[i] = rand() % 10;
 	}
-	Timer b;
 	
 	std::cout << "Massiv " << b.elapsed() << std::endl;
+	
 	delete[] mass;
 	delete[] x;
 	return 0;
