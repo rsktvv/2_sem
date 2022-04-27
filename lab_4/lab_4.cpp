@@ -1,3 +1,4 @@
+
 #include <iostream>
 #include <chrono>
 
@@ -63,7 +64,7 @@ void clear(T_List* head)
 bool find(T_List* head,int x)
 {
 	T_List* p = head->next;
-	while (p->next->next != nullptr)
+	while (p->next != nullptr)
 	{
 		if (p->elements == x)
 		{
@@ -81,6 +82,7 @@ int main()
 {
 	setlocale(LC_ALL, "Rus");
 	srand(time(NULL));
+
 	T_List* head = new T_List; 
 	head->next = nullptr; 
 	int N = 10000;
@@ -91,12 +93,19 @@ int main()
 	{
 		add(head, rand() % 10);
 	}
+<<<<<<< HEAD
 	
+=======
+
+	Timer a;
+
+>>>>>>> main
 	for (int i = 0; i < M; i++)
 	{
 		x[i] = rand() % 10;
 	}
 
+<<<<<<< HEAD
 	Timer a;
 	for (int i = 0; i < M; i++)
 	{
@@ -112,13 +121,20 @@ int main()
     }
 	std::cout <<"spisok " << a.elapsed() << std::endl;
 	clear(head);
+=======
+	
+	std::cout << "List " << a.elapsed() << std::endl;
+	CLEAR(head);
+>>>>>>> main
 	delete head;
 	std::cout << std::endl;
+	Timer b;
 	int* mass = new int[N];
 	for (int i = 0; i < N; i++)
 	{
 		mass[i] = rand() % 10;
 	}
+<<<<<<< HEAD
 	/*for (int i = 0; i < N; i++)
 	{
 		std::cout << mass[i];
@@ -139,6 +155,11 @@ int main()
 		}
 	}
 	std::cout <<"massiv " << b.elapsed() << std::endl;
+=======
+	
+	std::cout << "Massiv " << b.elapsed() << std::endl;
+	
+>>>>>>> main
 	delete[] mass;
 	delete[] x;
 	return 0;
