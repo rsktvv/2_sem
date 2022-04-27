@@ -24,14 +24,13 @@ public:
 		return std::chrono::duration_cast<second_t>(clock_t::now() - m_beg).count();
 	}
 };
-
 struct T_List
 {
 	T_List* next;   
 	int elements; 
 };
 
-void ADD(T_List* head, int elements)
+void add(T_List* head, int elements)
 {
 	T_List* p = new T_List;
 	p->elements = elements;
@@ -39,8 +38,7 @@ void ADD(T_List* head, int elements)
 	p->next = head->next;
 	head->next = p;
 }
-
-void PRINT(T_List* head)
+void print(T_List* head)
 {
 	T_List* p = head->next;
 	while (p != nullptr)
@@ -50,7 +48,7 @@ void PRINT(T_List* head)
 	}
 }
 
-void CLEAR(T_List* head)
+void clear(T_List* head)
 {
 	T_List* tmp;
 	T_List* p = head->next;
@@ -62,7 +60,7 @@ void CLEAR(T_List* head)
 	}
 }
 
-bool FIND(T_List* head,int x)
+bool find(T_List* head,int x)
 {
 	T_List* p = head->next;
 	while (p->next->next != nullptr)
@@ -91,11 +89,9 @@ int main()
 	int* x = new int[M];
 	for (int i = 0; i < N; i++)
 	{
-		ADD(head, rand() % 10);
+		add(head, rand() % 10);
 	}
-
-	//	PRINT(head);
-
+	
 	for (int i = 0; i < M; i++)
 	{
 		x[i] = rand() % 10;
@@ -104,20 +100,18 @@ int main()
 	Timer a;
 	for (int i = 0; i < M; i++)
 	{
-		if (FIND(head, x[i]) == true)
+		if (find(head, x[i]) == true)
 		{
-			//std::cout << x[i] << "-iaeaai" << std::endl;
-			
+			//std::cout << x[i] << std::endl;
 		}
 		else
 		{
-			//std::cout << x[i] << "-ia iaeaai" << std::endl;
+			//std::cout << x[i] << std::endl;
 			
 		}
     }
-
-	std::cout << a.elapsed()<< std::endl;
-	CLEAR(head);
+	std::cout <<"spisok " << a.elapsed() << std::endl;
+	clear(head);
 	delete head;
 	std::cout << std::endl;
 	int* mass = new int[N];
@@ -125,22 +119,26 @@ int main()
 	{
 		mass[i] = rand() % 10;
 	}
-	Timer b;
 	/*for (int i = 0; i < N; i++)
+	{
+		std::cout << mass[i];
+	}*/
+	Timer b;
+	for (int i = 0; i < N; i++)
 	{
 		for (int j = 0; j < M; j++)
 		{
 			if (mass[i] == x[j])
 			{
-				//std::cout << x[j]<< "-iaeaai"  << std::endl;
+				std::cout << 1 << std::endl;
 			}
 			else
 			{
-				//std::cout << x[j] << "-ia iaeaai"  << std::endl;
+				std::cout << 2 << std::endl;
 			}
 		}
-	}*/
-	std::cout << b.elapsed() << std::endl;
+	}
+	std::cout <<"massiv " << b.elapsed() << std::endl;
 	delete[] mass;
 	delete[] x;
 	return 0;
