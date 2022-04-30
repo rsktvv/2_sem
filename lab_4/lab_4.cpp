@@ -30,7 +30,7 @@ struct T_List
 	int elements; 
 };
 
-void add(T_List* head, int elements)
+void ADD(T_List* head, int elements)
 {
 	T_List* p = new T_List;
 	p->elements = elements;
@@ -38,7 +38,7 @@ void add(T_List* head, int elements)
 	p->next = head->next;
 	head->next = p;
 }
-void print(T_List* head)
+void PRINT(T_List* head)
 {
 	T_List* p = head->next;
 	while (p != nullptr)
@@ -48,7 +48,7 @@ void print(T_List* head)
 	}
 }
 
-void clear(T_List* head)
+void CLEAR(T_List* head)
 {
 	T_List* tmp;
 	T_List* p = head->next;
@@ -60,10 +60,10 @@ void clear(T_List* head)
 	}
 }
 
-bool find(T_List* head,int x)
+bool FIND(T_List* head,int x)
 {
 	T_List* p = head->next;
-	while (p->next->next != nullptr)
+	while (p->next != nullptr)
 	{
 		if (p->elements == x)
 		{
@@ -72,6 +72,18 @@ bool find(T_List* head,int x)
 		else
 		{
 			p = p->next;
+		}
+	}
+	return false;
+}
+
+bool FIND2(int mass[], int N, int M, int x[])
+{
+	for (int i = 0; i < N; i++)
+	{
+		for (int j = 0; j < M; j++)
+		{
+			mass[i] == x[j];
 		}
 	}
 	return false;
@@ -89,56 +101,33 @@ int main()
 	int* x = new int[M];
 	for (int i = 0; i < N; i++)
 	{
-		add(head, rand() % 10);
+		ADD(head, rand() % 10000);
 	}
 	
 	for (int i = 0; i < M; i++)
 	{
-		x[i] = rand() % 10;
+		x[i] = rand() % 10000;
 	}
 
 	Timer a;
 	for (int i = 0; i < M; i++)
 	{
-		if (find(head, x[i]) == true)
-		{
-			//std::cout << x[i] << std::endl;
-		}
-		else
-		{
-			//std::cout << x[i] << std::endl;
-			
-		}
+		FIND(head, x[i]) == true;
     }
-	std::cout <<"spisok " << a.elapsed() << std::endl;
-	clear(head);
+	std::cout <<"список: " << a.elapsed() << std::endl;
+	CLEAR(head);
 	delete head;
-	std::cout << std::endl;
+
 	int* mass = new int[N];
 	for (int i = 0; i < N; i++)
 	{
-		mass[i] = rand() % 10;
+		mass[i] = rand() % 10000;
 	}
-	/*for (int i = 0; i < N; i++)
-	{
-		std::cout << mass[i];
-	}*/
+	
 	Timer b;
-	for (int i = 0; i < N; i++)
-	{
-		for (int j = 0; j < M; j++)
-		{
-			if (mass[i] == x[j])
-			{
-				std::cout << 1 << std::endl;
-			}
-			else
-			{
-				std::cout << 2 << std::endl;
-			}
-		}
-	}
-	std::cout <<"massiv " << b.elapsed() << std::endl;
+	FIND2(mass, N, M, x);
+
+	std::cout <<"массив: " << b.elapsed() << std::endl;
 	delete[] mass;
 	delete[] x;
 	return 0;
