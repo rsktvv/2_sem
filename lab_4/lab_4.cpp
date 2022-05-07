@@ -121,13 +121,17 @@ int main()
 	int* mass = new int[N];
 	for (int i = 0; i < N; i++)
 	{
-		mass[i] = rand() % 10000;
+		mass[i] = rand() % 10;
 	}
 	
 	Timer b;
 	FIND2(mass, N, M, x);
 
 	std::cout <<"массив: " << b.elapsed() << std::endl;
+	for (int i = 0; i < N; i++)
+	{
+		std::cout << mass[i] << " ";
+	}
 	delete[] mass;
 	delete[] x;
 	return 0;
