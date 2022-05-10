@@ -1,4 +1,4 @@
-#include <iostream>
+п»ї#include <iostream>
 #include <chrono>
 
 class Timer
@@ -26,8 +26,8 @@ public:
 };
 struct T_List
 {
-	T_List* next;   
-	int elements; 
+	T_List* next;
+	int elements;
 };
 
 void ADD(T_List* head, int elements)
@@ -60,7 +60,7 @@ void CLEAR(T_List* head)
 	}
 }
 
-bool FIND(T_List* head,int x)
+bool FIND(T_List* head, int x)
 {
 	T_List* p = head->next;
 	while (p->next != nullptr)
@@ -77,7 +77,22 @@ bool FIND(T_List* head,int x)
 	return false;
 }
 
-bool FIND2(int mass[], int N, int M, int x[])
+bool FIND2(int mass[], int N, int x)
+{
+	for (int i = 0; i < N; i++)
+	{
+		if (mass[i] == x)
+		{
+			return true;
+		}
+		else
+		{
+			continue;
+		}
+	}
+	return false;
+}
+/*bool FIND2(int mass[], int N, int M, int x[])
 {
 	for (int i = 0; i < N; i++)
 	{
@@ -87,23 +102,23 @@ bool FIND2(int mass[], int N, int M, int x[])
 		}
 	}
 	return false;
-}
+}*/
 
 int main()
 {
 	setlocale(LC_ALL, "Rus");
 	srand(time(NULL));
-	T_List* head = new T_List; 
-	head->next = nullptr; 
+	T_List* head = new T_List;
+	head->next = nullptr;
 	int N = 10000;
 	int M = 1000;
-	
+
 	int* x = new int[M];
 	for (int i = 0; i < N; i++)
 	{
 		ADD(head, rand() % 10000);
 	}
-	
+
 	for (int i = 0; i < M; i++)
 	{
 		x[i] = rand() % 10000;
@@ -113,25 +128,24 @@ int main()
 	for (int i = 0; i < M; i++)
 	{
 		FIND(head, x[i]) == true;
-    }
-	std::cout <<"список: " << a.elapsed() << std::endl;
+	}
+	std::cout << "LIST: " << a.elapsed() << std::endl;
 	CLEAR(head);
 	delete head;
 
-	int* mass = new int[N];
-	for (int i = 0; i < N; i++)
+	int* mass = new int[M];
+	for (int i = 0; i < M; i++)
 	{
 		mass[i] = rand() % 10;
 	}
-	
-	Timer b;
-	FIND2(mass, N, M, x);
 
-	std::cout <<"массив: " << b.elapsed() << std::endl;
-	for (int i = 0; i < N; i++)
+	Timer b;
+	for (int i = 0; i < M; i++)
 	{
-		std::cout << mass[i] << " ";
+		FIND2(mass, N, x[i]) == true;
 	}
+
+	std::cout << "ARRAY: " << b.elapsed() << std::endl;
 	delete[] mass;
 	delete[] x;
 	return 0;
