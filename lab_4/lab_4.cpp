@@ -136,7 +136,7 @@ int main()
 	int* mass = new int[M];
 	for (int i = 0; i < M; i++)
 	{
-		mass[i] = rand() % 10;
+		mass[i] = rand() % 10000;
 	}
 
 	Timer b;
