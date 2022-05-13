@@ -47,10 +47,10 @@ public:
 		}
 		return *this;
 	}
-	r
+
 	Matrix operator+(const Matrix& mat)
 	{
-		Matrix tmp(2, 3);
+		Matrix tmp(m_n, mat.m_m);
 		for (int i = 0; i < m_n; i++)
 		{
 			for (int j = 0; j < m_m; j++)
@@ -60,10 +60,10 @@ public:
 		}
 		return tmp;
 	}
-	r
+
 	Matrix operator-(const Matrix& mat)
 	{
-		Matrix tmp(2, 3);
+		Matrix tmp(m_n, mat.m_m);
 		for (int i = 0; i < m_n; i++)
 		{
 			for (int j = 0; j < m_m; j++)
@@ -237,20 +237,23 @@ int main()
 	int m = 0;
 
 	std::cin >> n >> m;
-	Matrix A(n,m);
-	std::cin >> A;
-	std::cout << "Det A: " << std::endl << A.DET() << std::endl;
-	std::cout << "Reverse A: " << std::endl << A.reverse() << std::endl;
-
-	std::cin >> n >> m;
 	Matrix B(n, m);
 	std::cin >> B;
 	B.transposition();
 	std::cout << "Transposition Matrix B: " << std::endl << B << std::endl;
 	B.transposition();
 	std::cout << "Transposition Matrix B: " << std::endl << B << std::endl;
-	
-	
+
+	std::cin >> n >> m;
+	Matrix A(n,m);
+	std::cin >> A;
+
+	std::cout << '\n';
+	std::cout << A * B << std::endl;
+	std::cout << A - B << std::endl;
+
+	std::cout << "Det A: " << std::endl << A.DET() << std::endl;
+	std::cout << "Reverse A: " << std::endl << A.reverse() << std::endl;
 
 	return 0;
 }
