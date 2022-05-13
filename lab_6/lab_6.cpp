@@ -102,6 +102,7 @@ int main()
 			{
 				ADD(head, rand() % 1000);
 			}
+			PRINT(head);
 		}
 		else 
 			if (a == 2)
@@ -138,6 +139,7 @@ int main()
 				int b = 0;
 				std::cin >> b;
 				ADD(head, b);
+				
 				std::cout << "elsi vi hotite dobavit znachenie - 1, esli udalit - 2, nayti - 3, viyti - 4" << std::endl;
 				std::cin >> v;
 			}
