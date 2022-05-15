@@ -5,8 +5,6 @@
 const int N = 100000;
 const int M = 10000;
 
-
-
 class Timer
 {
 private:
@@ -148,19 +146,16 @@ int main()
 	{
 		x[i] = rand()%50;
 	}
+
 	Quick_Sort(0, N - 1, x);
-	/*for (int i = 0; i < N; i++)
-	{
-		std::cout << x[i] << " ";
-	}
-	std::cout << '\n';*/
-	std::cout << "search " << std::endl;
+
+	std::cout << "chto nayti " << std::endl;
 	std::cin >> k;
 
 	Timer t;
 	for (int i = 0; i < M; i++)
 	{
-		searching(x, N, k) == true;
+		searching(x, N, k);
 	}
 	std::cout << "massiv " << t.elapsed() << std::endl;
 

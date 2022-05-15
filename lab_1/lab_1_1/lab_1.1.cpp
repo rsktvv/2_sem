@@ -1,7 +1,7 @@
 /* 
-   time N=100 - 0.0001218
-   time N=1000 - 0.0006659
-   time N=10000 - 0.007831
+   time N=100 -    0.0001218
+   time N=1000 -   0.0006659
+   time N=10000 -  0.007831
    time N=100000 - 0.384093
 */
 
@@ -37,11 +37,11 @@ int main()
 	for (int i = 0; i < mass.size(); i++)
 	{
 		mass[i] = rand() % 50;
-		std::cout << mass[i] << " ";
+		//std::cout << mass[i] << " ";
 	}
 	std::cout << '\n';
-	Timer t;
 
+	Timer t;
 	for (int i = 0; i < mass.size(); i++)
 	{
 		if (mass[i] % 2 == 0)
@@ -50,12 +50,13 @@ int main()
 			i++;
 		}
 	}
+
 	std::cout << "time: " << t.elapsed() << std::endl;
 
-	for (int i = 0; i < mass.size(); i++)
+	/*for (int i = 0; i < mass.size(); i++)
 	{
 		std::cout << mass[i] << " ";
-	}
+	}*/
 	
 	return 0;
 }
