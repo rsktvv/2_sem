@@ -1,4 +1,7 @@
-﻿#include <iostream>
+﻿/*Создайте односвязный список из N = 10000 целых чисел и реализуйте операцию поиска в нем элемента k.Выполните M = 1000 поисковых запросов.
+Реализуйте такую же операцию для массива.Сравните производительность*/
+
+#include <iostream>
 #include <chrono>
 
 class Timer
@@ -24,6 +27,7 @@ public:
 		return std::chrono::duration_cast<second_t>(clock_t::now() - m_beg).count();
 	}
 };
+
 struct T_List
 {
 	T_List* next;
@@ -85,24 +89,10 @@ bool FIND2(int mass[], int N, int x)
 		{
 			return true;
 		}
-		else
-		{
-			continue;
-		}
 	}
 	return false;
 }
-/*bool FIND2(int mass[], int N, int M, int x[])
-{
-	for (int i = 0; i < N; i++)
-	{
-		for (int j = 0; j < M; j++)
-		{
-			mass[i] == x[j];
-		}
-	}
-	return false;
-}*/
+
 
 int main()
 {
@@ -111,9 +101,10 @@ int main()
 	T_List* head = new T_List;
 	head->next = nullptr;
 	int N = 10000;
-	int M = 1000;
+	int M = 10000;
 
 	int* x = new int[M];
+
 	for (int i = 0; i < N; i++)
 	{
 		ADD(head, rand() % 10000);
@@ -127,7 +118,7 @@ int main()
 	Timer a;
 	for (int i = 0; i < M; i++)
 	{
-		FIND(head, x[i]) == true;
+		FIND(head, x[i]);
 	}
 	std::cout << "LIST: " << a.elapsed() << std::endl;
 	CLEAR(head);
@@ -142,7 +133,7 @@ int main()
 	Timer b;
 	for (int i = 0; i < M; i++)
 	{
-		FIND2(mass, N, x[i]) == true;
+		FIND2(mass, N, x[i]);
 	}
 
 	std::cout << "ARRAY: " << b.elapsed() << std::endl;

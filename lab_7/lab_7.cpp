@@ -64,6 +64,10 @@ public:
 	Matrix operator-(const Matrix& mat)
 	{
 		Matrix tmp(m_n, mat.m_m);
+		if (m_m != mat.m_m && m_n != mat.m_m)
+		{
+			std::cout << "matrici ne ravnbI" << std::endl;
+		}
 		for (int i = 0; i < m_n; i++)
 		{
 			for (int j = 0; j < m_m; j++)
@@ -77,7 +81,10 @@ public:
 	Matrix operator*(const Matrix& mat)
 	{
 		Matrix tmp(m_n, mat.m_m);
-
+		if (m_m != mat.m_n)
+		{
+			std::cout << "stroka ne ravno stolbcu"<<std::endl;
+		}
 		for (int i = 0; i < m_n; i++)
 		{
 			for (int j = 0; j < mat.m_m; j++)
