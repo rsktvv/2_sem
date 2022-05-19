@@ -3,6 +3,7 @@
 class Matrix
 {
 public:
+
 	Matrix(int n, int m)
 	{
 		m_n = n;
@@ -64,15 +65,18 @@ public:
 	Matrix operator-(const Matrix& mat)
 	{
 		Matrix tmp(m_n, mat.m_m);
-		if (m_m != mat.m_m && m_n != mat.m_m)
+		if (m_m != mat.m_m && m_n != mat.m_n)
 		{
-			std::cout << "matrici ne ravnbI" << std::endl;
+			std::cout << "matrices have a different type " << std::endl;
 		}
-		for (int i = 0; i < m_n; i++)
+		else
 		{
-			for (int j = 0; j < m_m; j++)
+			for (int i = 0; i < m_n; i++)
 			{
-				tmp.m_mat[i][j] = m_mat[i][j] - mat.m_mat[i][j];
+				for (int j = 0; j < m_m; j++)
+				{
+					tmp.m_mat[i][j] = m_mat[i][j] - mat.m_mat[i][j];
+				}
 			}
 		}
 		return tmp;
@@ -83,16 +87,19 @@ public:
 		Matrix tmp(m_n, mat.m_m);
 		if (m_m != mat.m_n)
 		{
-			std::cout << "stroka ne ravno stolbcu"<<std::endl;
+			std::cout << "matrices have a different type " << std::endl;
 		}
-		for (int i = 0; i < m_n; i++)
+		else
 		{
-			for (int j = 0; j < mat.m_m; j++)
+			for (int i = 0; i < m_n; i++)
 			{
-				tmp.m_mat[i][j] = 0;
-				for (int k = 0; k < mat.m_n; k++)
+				for (int j = 0; j < mat.m_m; j++)
 				{
-					tmp.m_mat[i][j] += m_mat[i][k] * mat.m_mat[k][j];
+					tmp.m_mat[i][j] = 0;
+					for (int k = 0; k < mat.m_n; k++)
+					{
+						tmp.m_mat[i][j] += m_mat[i][k] * mat.m_mat[k][j];
+					}
 				}
 			}
 		}
@@ -112,7 +119,7 @@ public:
 	{ 
 		if ((m_n != m_m) && (m_n!=2) && (m_n!=3))
 		{
-			std::cout << "matrix is not 2x2 or 3x3 " << std::endl;
+			std::cout << "the operation is not valid " << std::endl;
 		}
 
 		else if (m_n == 2)
@@ -134,7 +141,7 @@ public:
 
 	Matrix Matrix::reverse()
 	{
-		int Det = DET();
+		double Det = DET();
 		Matrix tmp(m_n, m_m);
 		if ((m_n == m_m && m_n== 2) || (m_n == m_m && m_n == 3))
 		{
@@ -168,7 +175,7 @@ public:
 			}
 		}
 		else
-			std::cout << "matrix is not 2x2 or 3x3 " << std::endl;
+			std::cout << "the operation is not valid " << std::endl;
 	}
 
 	Matrix Matrix::transposition()
@@ -183,25 +190,6 @@ public:
 			}
 		}
 
-		for (int i = 0; i < m_m; i++)
-		{
-			delete[] m_mat[i];
-		}
-		delete m_mat;
-
-		m_mat = new double* [m_n];
-		for (int i = 0; i < m_n; i++)
-		{
-			m_mat[i] = new double[m_m];
-		}
-
-		for (int i = 0; i < m_n; i++)
-		{
-			for (int j = 0; j < m_m; j++)
-			{
-				m_mat[i][j] = tmp.m_mat[i][j];
-			}
-		}
 		return tmp;
 	}
 
@@ -242,25 +230,29 @@ int main()
 {
 	int n = 0;
 	int m = 0;
-
+	std::cout << "A matrix type " << std::endl;
 	std::cin >> n >> m;
-	Matrix B(n, m);
-	std::cin >> B;
-	B.transposition();
-	std::cout << "Transposition Matrix B: " << std::endl << B << std::endl;
-	B.transposition();
-	std::cout << "Transposition Matrix B: " << std::endl << B << std::endl;
-
-	std::cin >> n >> m;
-	Matrix A(n,m);
+	std::cout << "matrix A " << std::endl;
+	Matrix A(n, m);
 	std::cin >> A;
 
+	std::cout << "B matrix type " << std::endl;
+	std::cin >> n >> m;
+	std::cout << "matrix B " << std::endl;
+	Matrix B(n, m);
+	std::cin >> B;
 	std::cout << '\n';
+	std::cout << "A * B " << std::endl;
 	std::cout << A * B << std::endl;
+	std::cout << "A - B" << std::endl;
 	std::cout << A - B << std::endl;
 
-	std::cout << "Det A: " << std::endl << A.DET() << std::endl;
-	std::cout << "Reverse A: " << std::endl << A.reverse() << std::endl;
+	
+	std::cout << "Transposition A: " << std::endl << A.transposition() << std::endl;
+
+
+	std::cout << "Det B: " <<std::endl<< B.DET() << std::endl;
+	std::cout << "Reverse B: "<<std::endl << B.reverse() << std::endl;
 
 	return 0;
 }
