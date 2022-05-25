@@ -19,9 +19,6 @@ public:
 
 	Matrix()
 	{
-#ifdef MY_DEBUG
-		std::cout << "Constructor" << endl;
-#endif 
 		m_n = N;
 		m_m = M;
 		for (int i = 0; i < m_n; i++)
@@ -35,9 +32,6 @@ public:
 
 	Matrix(const T mas[N][M])
 	{
-#ifdef MY_DEBUG
-		std::cout << "Constructor" << std::endl;
-#endif
 		m_n = N;
 		m_m = M;
 		for (int i = 0; i < m_n; i++)
@@ -48,9 +42,7 @@ public:
 
 	Matrix(const MasWrapper<T, N, M>& mas)
 	{
-#ifdef MY_DEBUG
-		std::cout << "Constructor" << std::endl;
-#endif
+
 		m_n = N;
 		m_m = M;
 		for (int i = 0; i < m_n; i++)
@@ -62,9 +54,7 @@ public:
 	template<typename T, int N, int M>
 	Matrix(const Matrix<T, N, M>& mat)
 	{
-#ifdef MY_DEBUG
-		std::cout << "Copy constructor" << endl;
-#endif 
+
 		m_n = mat.getN();
 		m_m = mat.getM();
 
@@ -81,9 +71,7 @@ public:
 	template<typename T, int N, int M>
 	Matrix<T, N, M>& operator=(const Matrix<T, N, M>& mat)
 	{
-#ifdef MY_DEBUG
-		std::cout << "operator = " << endl;
-#endif 
+
 		m_n = mat.getN();
 		m_m = mat.getM();
 
@@ -100,13 +88,11 @@ public:
 	template<typename T, int N, int M>
 	Matrix<T, N, M> operator+(const Matrix<T, N, M>& mat)
 	{
-#ifdef MY_DEBUG
-		std::cout << "operator + " << endl;
-#endif 
+
 		Matrix<T, N, M> tmp;
 		if ((N != mat.getN()) && (M != mat.getM()))
 		{
-			std::cout << "Error! " << endl;
+			std::cout << "the matrices are not the same " << std::endl;
 		}
 
 		for (int i = 0; i < m_n; i++)
@@ -122,13 +108,11 @@ public:
 	template<typename T, int N, int M>
 	Matrix<T, N, M> operator-(const Matrix<T, N, M>& mat)
 	{
-#ifdef MY_DEBUG
-		std::cout << "operator - " << endl;
-#endif 
+
 		Matrix<T, N, M> tmp;
 		if ((N != mat.getN()) && (M != mat.getM()))
 		{
-			std::cout << "Error! " << endl;
+			std::cout << "the matrices are not the same " << std::endl;
 		}
 		for (int i = 0; i < m_n; i++)
 		{
@@ -143,12 +127,11 @@ public:
 	template<typename T, int N, int M>
 	Matrix<T, N, M> operator*(const Matrix<T, N, M>& mat)
 	{
-#ifdef MY_DEBUG
-		std::cout << "operator*" << std::endl;
-#endif
+
 		Matrix<T, N, M> tmp;
 
 		for (int i = 0; i < m_n; i++)
+		{
 			for (int j = 0; j < mat.getM(); j++)
 			{
 				T sum = 0;
@@ -156,7 +139,7 @@ public:
 					sum += m_mat[i][k] * mat.get(k, j);
 				tmp.set(i, j, sum);
 			}
-
+		}
 		return tmp;
 	}
 
@@ -164,18 +147,14 @@ public:
 
 	~Matrix()
 	{
-#ifdef MY_DEBUG
-		std::cout << "Destructor " << endl;
-#endif 
+
 	}
 
 	T DET()
 	{
-#ifdef MY_DEBUG
-		std::cout << "Det" << std::endl;
-#endif
+
 		if ((m_n != m_m) || ((m_n != 2) && (m_m != 3)))
-			std::cout << "This format is not supported. " << endl;
+			std::cout << "matrix isnt 2x2 or 3x3 " << std::endl;
 		if (m_n == 2)
 		{
 			return m_mat[0][0] * m_mat[1][1] - m_mat[0][1] * m_mat[1][0];
@@ -194,20 +173,18 @@ public:
 
 	Matrix<T, N, M> reverse()
 	{
-#ifdef MY_DEBUG
-		std::cout << "reverse" << std::endl;
-#endif
+
 		Matrix<double, N, M> tmp;
 		if ((N != M) || ((N != 2) && (N != 3)))
 		{
-			std::cout << "This format is not supported. " << endl;
+			std::cout << "the matrices are not the same " << std::endl;
 			return tmp;
 		}
 
 		double Det = DET();
 		if (Det == 0)
 		{
-			std::cout << "DET = 0. Inverse Matrix does not exist. " << endl;
+			std::cout << "DET = 0 " << std::endl;
 			return tmp;
 		}
 		if ((m_n == m_m && m_n == 2) || (m_n == m_m && m_n == 3))
@@ -237,12 +214,9 @@ public:
 		}
 	}
 
-	template<typename T, int N, int M>
-	Matrix<T, N, M> Matrix::transposition()
+	
+	Matrix<T, N, M> transposition()
 	{
-#ifdef MY_DEBUG
-		std::cout << "transposition" << std::endl;
-#endif
 		Matrix<T, M, N> tmp;
 
 		for (int i = 0; i < M; i++)
@@ -281,7 +255,6 @@ std::istream& operator>>(std::istream& in, Matrix<T, N, M>& mat)
 template<typename T, int N, int M>
 std::ostream& operator<<(std::ostream& out, const Matrix<T, N, M>& mat)
 {
-	out << "Matrix " << mat.m_n << "x" << mat.m_m << std::endl;
 	for (int i = 0; i < mat.m_n; i++)
 	{
 		for (int j = 0; j < mat.m_m; j++)
@@ -293,17 +266,19 @@ std::ostream& operator<<(std::ostream& out, const Matrix<T, N, M>& mat)
 	return out;
 }
 
-using Vec2i = Matrix<int, 2, 1>;
-using Vec2d = Matrix<double, 2, 1>;
-using Mat22i = Matrix<int, 2, 2>;
-using Mat22d = Matrix<double, 2, 2>;
-using Mat33i = Matrix<int, 3, 3>;
-using Mat33d = Matrix<double, 3, 3>;
+using Vec2i  = Matrix <int, 2, 1>;
+using Vec2d  = Matrix <double, 2, 1>;
+using Mat22i = Matrix <int, 2, 2>;
+using Mat22d = Matrix <double, 2, 2>;
+using Mat33i = Matrix <int, 3, 3>;
+using Mat33d = Matrix <double, 3, 3>;
+using Mat23i = Matrix <int, 2, 3>;
+using Mat32i = Matrix <int, 3, 2>;
 
 int main()
 {
 
-	std::cout << "=== Test 1 ( * ) ===" << std::endl;
+	std::cout << " Test '*' " << std::endl;
 	{
 		Mat22d A({ {{1,2},{3,4}} });
 
@@ -314,38 +289,38 @@ int main()
 		assert(B.get(0, 0) == 3);
 		assert(B.get(1, 0) == 7);
 	}
-	std::cout << "Done!" << std::endl;
+	std::cout << "good" << std::endl;
 
-	std::cout << "=== Test 2 ( - ) === " << std::endl;
+	std::cout << "Test '-' " << std::endl;
 	{
-		Mat22d A({ {{1,1},{1,1}} });
+		Mat22d A({ {{1,2},{3,4}} });
 
 		Mat22d X({ {{1,2},{3,4}} });
 		Mat22d B = A - X;
 
 		assert(B.get(0, 0) == 0);
-		assert(B.get(0, 1) == -1);
-		assert(B.get(1, 0) == -2);
-		assert(B.get(1, 1) == -3);
+		assert(B.get(0, 1) == 0);
+		assert(B.get(1, 0) == 0);
+		assert(B.get(1, 1) == 0);
 	}
-	std::cout << "Done!" << std::endl;
+	std::cout << "good" << std::endl;
 
-	std::cout << "=== Test 3 ( + ) ===" << std::endl;
+	std::cout << "Test '+' " << std::endl;
 	{
-		Mat22d A({ {{1,1},{1,1}} });
+		Mat22d A({ {{1,2},{3,4}} });
 
 		Mat22d X({ {{1,2},{3,4}} });
 
 		Mat22d B = A + X;
 
 		assert(B.get(0, 0) == 2);
-		assert(B.get(0, 1) == 3);
-		assert(B.get(1, 0) == 4);
-		assert(B.get(1, 1) == 5);
+		assert(B.get(0, 1) == 4);
+		assert(B.get(1, 0) == 6);
+		assert(B.get(1, 1) == 8);
 	}
-	std::cout << "Done!" << std::endl;
+	std::cout << "good" << std::endl;
 
-	std::cout << "=== Test 4 ( Det ) ===" << std::endl;
+	std::cout << "Test Det" << std::endl;
 	{
 		Mat22d A({ {{1,2},{3,4}} });
 
@@ -354,9 +329,9 @@ int main()
 		assert(A.DET() == -2);
 		assert(X.DET() == 0);
 	}
-	std::cout << "Done!" << std::endl;
+	std::cout << "good" << std::endl;
 
-	std::cout << "=== Test 5 ( Reverese ) === " << std::endl;
+	std::cout << "Test Reverese" << std::endl;
 	{
 		Mat22d X({ {{1,2},{3,4}} });
 		Mat33d A({ {{2,5,7},{6,3,4},{5,-2,-3},} });
@@ -378,12 +353,12 @@ int main()
 		assert(C.get(2, 1) == -29);
 		assert(C.get(2, 2) == 24);
 	}
-	std::cout << "Done!" << std::endl;
+	std::cout << "good" << std::endl;
 	
-	std::cout << "=== Test 6 ( Transposition ) === " << std::endl;
+	std::cout << "Test Transposition" << std::endl;
 	{
-		Matrix<int,2,3> X({ {{1,2,3},{4,5,6}} });
-		Matrix<int,3,2> B = X.transposition();
+		Mat23i X({ {{1,2,3},{4,5,6}} });
+		Mat32i B = X.transposition();
 		assert(B.get(0, 0) == 1);
 		assert(B.get(1, 0) == 2);
 		assert(B.get(2, 0) == 3);
@@ -391,7 +366,7 @@ int main()
 		assert(B.get(1, 1) == 5);
 		assert(B.get(2, 1) == 6);
 	}
-	std::cout << "Done!" << std::endl;
+	std::cout << "good" << std::endl;
 
 
 	return 0;
