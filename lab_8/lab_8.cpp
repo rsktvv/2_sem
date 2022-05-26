@@ -1,7 +1,6 @@
 #include <iostream>
 #include <cassert>
 
-
 template<typename T, int N, int M>
 struct MasWrapper
 {
@@ -124,11 +123,11 @@ public:
 		return tmp;
 	}
 
-	template<typename T, int N, int M>
-	Matrix<T, N, M> operator*(const Matrix<T, N, M>& mat)
+	template<typename T, int K>
+	Matrix<T, N, M> operator*(const Matrix<T, M, K>& mat)
 	{
 
-		Matrix<T, N, M> tmp;
+		Matrix<T, N, K> tmp;
 
 		for (int i = 0; i < m_n; i++)
 		{
